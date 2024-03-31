@@ -1,3 +1,7 @@
+### NATURAL LANGUAGE PROCESSING WITH R ###
+
+#Original Data Set https://www.kaggle.com/datasets/kazanova/sentiment140/data
+
 ### Loading the dataset and simplified preprocessing ###
 # Load necessary library
 library(tidyverse)
@@ -19,7 +23,7 @@ sum(duplicated(dataset))
 sampled_dataset <- dataset %>% sample_n(1000)
 
 
-### Checking for the possible values for ###
+### Checking for the possible values for the 'Target' Variable ###
 # List unique values in the 'target' column
 unique_values_in_target <- unique(sampled_dataset$target)
 # Print the unique values
