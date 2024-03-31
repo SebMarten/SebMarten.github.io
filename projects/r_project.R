@@ -81,7 +81,7 @@ print(paste("Bayes Accuracy:", bayes_accuracy))
 # Create a new data frame with actual and predicted values for Bayes
 bayes_results_table <- data.frame(Actual = dtm_test$target, Predicted = bayes_predictions)
 head(bayes_results_table)
-# -> Accuracy of 50.5 % which is not great. However, given the complexity of sentiment analysis, this is already quite impressive.
+# -> Accuracy of 50.5 % which is not great and could also be random.
 
 
 #SVM Model
@@ -98,4 +98,3 @@ head(svm_results_table)
 # -> Accuracy of 69.5 % which is not great but better than Naive Bayes. 
 # However, given the complexity of sentiment analysis, this is already quite impressive.
 # By increasing the size of the data set, the accuracy could probably be increased even more.
-
