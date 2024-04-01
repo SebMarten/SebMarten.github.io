@@ -1,12 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 ### The data set on car prices and features can be found here:
 #https://www.kaggle.com/datasets/rupindersinghrana/car-features-and-prices-dataset/data
-
 ### The formula for the visualisation were found online by another author working on this data set:
 # https://www.kaggle.com/code/mustafacakir/car-price-prediction
 
@@ -17,10 +10,8 @@
 # Supervised Learning
 # Unsupervised Learning
 
-
-# In[2]:
-
-
+# In[1]:
+### SET UP ###
 #Importing libraries
 import numpy as np
 import pandas as pd
@@ -29,55 +20,38 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
 
+# In[2]:
 # Configure default settings for plots
 sb.set(style='ticks')
 sb.set_palette('Paired')
 plt.rcParams['axes.spines.top'] = False    # Remove top border
 plt.rcParams['axes.spines.right'] = False  # Remove right border
 
-
 # In[3]:
-
-
 #Importing the data
 input_path = r"C:\Users\sgayc\Desktop\Uni\7.Semester\BA for Marketing\Assignment 2\RawData\car_features.csv"
 inpDf = pd.read_csv(input_path, sep=',', header = 0)
 print(f'The dataset has {inpDf.shape[0]} rows and {inpDf.shape[1]} columns')
 print(inpDf.head())
 
-
 # In[4]:
-
-
 #Creating a copy of the input data for further analysis
 df = inpDf.copy()
 
-
 # In[5]:
-
-
 ### BASIC DATA EXPLORATION ###
 #Getting an overview of the data
 df.head()
 
-
 # In[6]:
-
-
 #Getting an overview of the data
 df.tail()
 
-
 # In[7]:
-
-
 #Getting an overview of the columns and data types
 df.info()
 
-
 # In[8]:
-
-
 #Getting an overview of missing values. (Formula for fuction below can be found on top of page) 
 def check_missing_values(data):
   '''
@@ -104,191 +78,122 @@ check_missing_values(df)
 
 
 # In[9]:
-
-
 #Getting an overview of the the Duplicates:
 print(f'There are {df.duplicated().sum()} missing values')
 
-
 # In[10]:
-
-
 #Getting an overview of all features:
 df.describe(include='all').transpose()
 
-
 # In[11]:
-
-
 ### DATA CLEANING AND PREPARATION ###
 ### Removing Duplicates ###
 df.drop_duplicates(inplace=True)
 print(df.shape)
 print(df.duplicated().sum())
 
-
 # In[12]:
-
-
+### Handling Missing Values ###
 ### Focusing on top makes and models ###
 df['Make'].value_counts()
 
-
 # In[13]:
-
-
 #Finding out how many different types of 'Makes' are common defined here as appearing 200 or more times in the dataset.
 n = len(df['Make'].value_counts().loc[lambda x : x>=200])
 n
 
-
 # In[14]:
-
-
 #Create a list of top makes based on n
 top_makes = df['Make'].value_counts().nlargest(n).index.values
 top_makes
 
-
 # In[15]:
-
-
 #Looking at the number models in the new top_makes dataframe
 df[df['Make'].isin(list(top_makes))]['Model'].value_counts()
 
-
 # In[16]:
-
-
 #Looking at the number models in the new top_makes dataframe
 df[df['Make'].isin(list(top_makes))].shape
 
-
 # In[17]:
-
-
 #Create a list of top models appearing 200 or more times in the dataset.
 df['Model'].value_counts().loc[lambda x : x>=20]
 
-
 # In[18]:
-
-
 #Finding out how many different types of 'Models' are common defined here as appearing 20 or more times in the dataset.
 nr_top_models = len(df['Model'].value_counts().loc[lambda x : x>=20])
 nr_top_models
 
-
 # In[19]:
-
-
 #Create a list of top makes based on nr_top_models
 top_models = df['Model'].value_counts().nlargest(nr_top_models).index.values
 top_models
 
-
 # In[20]:
-
-
 #Looking at the number of models in the new top_makes dataframe
 df_top_models = df[df['Model'].isin(list(top_models))]
 df_top_models.shape
 
-
 # In[21]:
-
-
 #Looking at the number of makes in the new top_makes dataframe
 df_top_models['Make'].value_counts().shape
 
-
 # In[22]:
-
-
 #Handling missing values (Formula for fuction below can be found on top of page) 
 check_missing_values(df_top_models)
 #Conclusion: Focusing on the top models and makes has led to a reduction of missing values
 
 
 # In[23]:
-
-
 # Handling missing values for EngineHP
 df_top_models[df_top_models['Engine HP'].isna()]
 #Conclusion: For the models Focus and MKZ the missing values for Engine HP may be researched online.
 
-
 # In[24]:
-
-
 #Researching the missing Engine HP values online
 df_top_models[(df_top_models['Make'] == 'Ford') & (df_top_models['Model'] == 'Focus') 
               & (df_top_models['Year'] == 2015) 
               & (df_top_models['Engine Fuel Type'] == 'electric')]
 
-
 # In[25]:
-
-
 # Updating the Engine HP for all electric Ford Focus vehicles to 143
 df_top_models.loc[(df_top_models['Make'] == 'Ford') & (df_top_models['Model'] == 'Focus') 
               & (df_top_models['Year'].isin([2015, 2016, 2017])) 
               & (df_top_models['Engine Fuel Type'] == 'electric'), 'Engine HP'] = 143
 df_top_models[df_top_models['Engine HP'].isna()]
 
-
 # In[26]:
-
-
 #Looking at all Lincoln MKZ vehicles
 df_top_models[(df_top_models['Make'] == 'Lincoln') & (df_top_models['Model'] == 'MKZ') 
               & (df_top_models['Year'] == 2017)]
 
-
 # In[27]:
-
-
 # Updating the Engine HP for all Lincoln MKZ vehicles
 df_top_models.loc[(df_top_models['Make'] == 'Lincoln') & (df_top_models['Model'] == 'MKZ') 
               & (df_top_models['Year'] == 2017), 'Engine HP'] = 245
 df_top_models[df_top_models['Engine HP'].isna()]
 
-
 # In[28]:
-
-
 #Handling missing values for Market Category
 df_top_models[df_top_models['Market Category'].isna()].shape
 
-
 # In[29]:
-
-
 #Conclusion: Dropping the Market Category as it has too many missing values and no way to impute it
 df_top_models.drop('Market Category', axis=1, inplace=True)
 
-
 # In[30]:
-
-
 #Check whether all missing values are imputed. (Formula for fuction below can be found on top of page) 
 check_missing_values(df_top_models)
 #Conclusion: All missing values are imputed.
 
-
 # In[31]:
-
-
 # Transform all column names to lower case and replace empty spaces with underscores
 df_top_models.columns = df_top_models.columns.str.lower().str.replace(' ', '_',)
 
 # Display the transformed column names
 df_top_models.columns.tolist()
 
-
 # In[32]:
-
-
 ### Outlier Detection ###
 # Create lists for categorical and numeric columns (Formula for fuction below can be found on top of page) 
 cat_cols = []
@@ -304,8 +209,7 @@ print(f'Categorical features: {len(cat_cols)}', cat_cols)
 print(f'Numeric features: {len(num_cols)}', num_cols)
 
 
-### For Categorical Data ###
-
+### Outlier Detection For Categorical Data ###
 # Function to create labeled barplots for categorical features
 def plot_counts(data, feature, perc = False, n = None, hue = None):
   """
@@ -376,31 +280,19 @@ for i in cat_cols:
 
 
 # In[33]:
-
-
 # Researching 'UNKNOWN' values in transmission type
 df_top_models[(df_top_models['transmission_type'] == 'UNKOWN')]
 
-
 # In[34]:
-
-
 df_top_models[(df_top_models['model'] == 'Jimmy')]
 #After some online research the Transmission Types of the unkown vehicles is Manual
 
-
 # In[35]:
-
-
 #Repalce all 'Unkown' values with 'Manual' (Formula for fuction below can be found on top of page) 
 df_top_models['transmission_type'] = df_top_models['transmission_type'].replace('UNKNOWN', 'MANUAL')
 
-
 # In[36]:
-
-
-### For Numeric Data ###
-
+### Outliers For Numeric Data ###
 # A function to display the both the histogram and the boxplot of a numeric column
 def dist_plot(data, feature):
   '''
@@ -480,23 +372,17 @@ for i in num_cols:
 
 # In[37]:
 
-
 # Detecting outliers in highway_mpg
 df_top_models[df_top_models['highway_mpg'] > 50].head(50)
 #For the Ford Focus that is correct after research
 #For the Audi A6 the correct highwayy mpg is 34
 
-
 # In[38]:
-
-
 #Correcting the highway mpg of the Audi A6
 df_top_models.loc[1119, 'highway_mpg'] = 34
 
 
 # In[39]:
-
-
 #Looking at Outliers in city_mpg
 df_top_models[df_top_models['city_mpg'] > 60].head(50)
 df_top_models[df_top_models['engine_fuel_type'] == 'electric']
@@ -505,29 +391,18 @@ df_top_models[df_top_models['engine_fuel_type'] == 'electric']
 df_top_models = df_top_models[df_top_models['engine_fuel_type'] != 'electric']
 df_top_models
 
-
 # In[40]:
-
-
 df_top_models[df_top_models['popularity'] > 4000].head(500)
-
 # There is sadly no possibilty to check this. Therefore, this popularity is assumed correctly although it a appears striking that only Ford´s models perform this well
 
-
 # In[41]:
-
-
 #Checking outliers in engine_hp
 df_top_models[df_top_models['engine_hp'] > 600].head(500)
 #All the higher value are correct after checking
-
 #Decision: No further outlier detection of this data set since the values are observable facts and true.
 
-
 # In[42]:
-
-
-### Feature Engineering ###
+### FEATURE ENGINEERING ###
 ### Categorising door numbers as this is often rather a stylistic decision rather than something to be quanitfied ###
 def categorize_doors(n):
     if n == 2:
@@ -543,24 +418,15 @@ df_top_models['door_category'] = df_top_models['number_of_doors'].apply(categori
 df_top_models = df_top_models.drop('number_of_doors', axis=1)
 df_top_models
 
-
 # In[43]:
-
-
 ### Calculating Engine Efficiency ###
 df_top_models['engine_efficiency'] = df_top_models['engine_hp'] / df_top_models['engine_cylinders']
 df_top_models
 
-
 # In[44]:
-
-
 #Calculating the average_mpg (55% City, 45% Highway)
 df_top_models['combined_mpg'] = (df_top_models['city_mpg'] * 0.55) + (df_top_models['highway_mpg'] * 0.45)
-
-
 # In[45]:
-
 
 ### Getting an overview of the final Data ###
 ### Outlier Detection ###
@@ -585,30 +451,19 @@ for i in num_cols:
     print (f'This is the Distribution Plot for {i}')
     dist_plot(df_top_models, i)
 
-
 # In[46]:
-
-
 df_top_models.info()
 
-
 # In[47]:
-
-
 df_top_models.head()
 
-
 # In[48]:
-
-
 output_path = r"C:\Users\sgayc\Desktop\Uni\7.Semester\BA for Marketing\Assignment 2\RawData\car_features_cleaned.csv"
 df_top_models.to_csv(output_path, sep=',', float_format='%.2f', header=True, index=False)
 
-
 # In[49]:
-
-
-### DATA PREPARATION FOR MACHINE LEARNING ###
+### MACHINE LEARNING ###
+### Preprocessing ###
 #Creating Dummies for the categorical columns
 # use for loop to go through categories and print the ones with type == 'object'
 to_dummy_list = []
@@ -619,10 +474,7 @@ for col_name in df_top_models.columns:
         # Create a list of features to 'dummy' 
         to_dummy_list.append(col_name)
 
-
 # In[50]:
-
-
 # Function to dummy all the categorical variables used for modeling using a loop for
 def dummy_df(df, todummy_list):
     for x in todummy_list:
@@ -633,17 +485,11 @@ def dummy_df(df, todummy_list):
 
 inpDf = dummy_df(df_top_models, to_dummy_list)
 
-
 # In[51]:
-
-
 inpDf
 
-
 # In[52]:
-
-
-### Supervised Learning ###
+### Supervised Learning with Linear Regression ###
 # Import libraries
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -676,14 +522,9 @@ print(f'Explained Variance: {explained_variance}')
 
 
 # In[53]:
-
-
 # The linear regression can explain 94.68 % of the variance which is a very good score.
 
-
 # In[54]:
-
-
 ### Unsupervised Learning ###
 # Dropping not wanted columns for clustering, in this case engine_hp because then, it can be compared how the clusters related to engine hp.
 from sklearn.cluster import KMeans
@@ -704,8 +545,6 @@ plt.show()
 
 
 # In[55]:
-
-
 # Applying found elbow point k value to k means algorithm
 kVal = 4
 kmeans = KMeans(n_clusters=kVal)
@@ -716,10 +555,7 @@ outDf = pd.concat((xDf, inpDf['engine_hp']), axis=1)
 print(outDf)
 outDf
 
-
 # In[56]:
-
-
 # Conclusion: The unsupervised learning algorithm k-Means has provided four unique clusters. 
 # Now, I want to get a better understanding for the clusters. 
 # Loop through each unique value in the 'kmeans_label' column
@@ -736,25 +572,9 @@ for label in outDf['kmeans_label'].unique():
     print("\nSummary Statistics of HP Engine:\n", hp_engine_summary)
     print("\n---\n")
 
-
 # In[57]:
-
-
 ### Conclusion k_means:
 # Cluster 1 seems to have many cars with high roughly the highes engine hp.
 # Cluster 0 seems to have cars with roughly the lowest engine hp.
 # Cluster 2 and 3 have a wide range of values, averaging between the first two clusters.
-
 #This analysis could be further extended to a holistic anaylysis to other characteristics except hp. However, that is beyond the scope of this analysis.
-
-
-# In[58]:
-
-
-### Conclusion k_means:
-# Cluster 1 seems to have many cars with high roughly the highes engine hp.
-# Cluster 0 seems to have cars with roughly the lowest engine hp.
-# Cluster 2 and 3 have a wide range of values, averaging between the first two clusters.
-
-#This analysis could be further extended to a holistic anaylysis to other characteristics except hp. However, that is beyond the scope of this analysis.
-
