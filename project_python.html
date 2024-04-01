@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Gaycken Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo">Portfolio</a>
+				</header>
+
+			<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Projects</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="media.html">Media</a></li>
+						<li><a href="about.html">About Me & Contact</a></li>
+						<li><a href="moreabout.html">More About Me</a></li>
+						<li class="active"><a href="project_python.html">Python Project</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/sebastian-gaycken" class="icon brands alt fa-linkedin"><span class="label">Facebook</span></a></li>
+						<li><a href="https://github.com/sebmarten" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<!-- Post -->
+						<section class="post">
+							<header class="major">
+								<h1>Analytics Pipeline<br />in Python</h1>
+								<p>In this project, I analysed car prices and features in Python which was special to me as I completed two internships in the automotive industry. I will use data cleaning, feature engineering and machine learning.</p>
+							</header>
+							<h2>The Data</h2>
+							<p>	
+								The chosen dataset pertains to car features and prices, sourced from Kaggle. This dataset was selected due to its comprehensive coverage of car attributes, including make, model, engine specifications, fuel type, and pricing, which are pivotal for constructing predictive models for car prices and understanding market dynamics.
+								
+								A meticulous data cleaning and preparation process was undertaken to ensure the dataset's quality and relevance. This involved removing duplicates, handling missing values judiciously, and focusing on the most represented makes and models to ensure a robust dataset for analysis. For instance, missing values for engine horsepower were researched and imputed based on specific models, exemplifying a rigorous approach to data integrity.
+								<br/><br/>
+								Statistical assessment revealed insights into variable distributions and potential outliers. For example, outliers in the highway_mpg variable were carefully evaluated and corrected based on external research, demonstrating the depth of analysis conducted to ensure data accuracy.
+								The dataset was also scrutinized for compliance with data protection regulations, such as GDPR, to emphasize privacy and security considerations. Although the dataset primarily consists of publicly available information on car specifications and does not directly involve personal data, the commitment to adhering to privacy standards underscores the thoroughness and ethical considerations of the analysis process.
+
+								The processed dataset now serves as a solid foundation for advanced analytics and machine learning applications. It enables the exploration of relationships between various car features and prices, facilitating the development of predictive models for car valuation and market trend analysis. This careful selection and preparation of the dataset underscore a profound understanding of its relevance and potential applications, ensuring that the data's integrity and the analysis's compliance with ethical standards are upheld.
+								 </p>
+							<div>
+								<ul class="actions special">
+									<li><a href="https://www.kaggle.com/datasets/rupindersinghrana/car-features-and-prices-dataset" class="button" target="_blank">Go to original dataset</a></li>
+									<li><a href="/documents/python_project/python_project_car_features.csv" class="button icon solid fa-download" download="python_project_car_features.csv">Download Car Features Data</a></li>
+									<li><a href="https://github.com/SebMarten/portfolio/blob/a7e024c90dc4a5c90b59ca9eeda57403cac4a921/projects/python_project.py" class="button" target="_blank">Check out the complete code in GitHub</a></li>
+								</div>
+							<hr />	
+							<h2>Data Preporcessing</h2>
+							<p>	Initially, the dataset underwent cleaning to remove duplicates and handle missing values. This was not a mere exclusion of incomplete rows but involved strategic imputation based on external research for variables like engine horsepower. In addition, outliers were removed using the IQR method based on visualizations, illustrating the nuanced approach to preparing the dataset. Feature engineering further enhanced the dataset's utility for modeling. Categorizing the number of doors and calculating engine efficiency transformed raw data into meaningful attributes that could significantly influence model predictions. For instance, converting door numbers into categories like "Two-door" and "Four-door" aligns with market segmentation practices, while engine efficiency provides a nuanced measure of performance relative to engine size.
+								<br/><br/>The creation of dummy variables from categorical data represents another sophisticated preprocessing step, pivotal for the success of machine learning models. This technique transforms categorical variables into a format that can be provided to machine-learning algorithms to better understand patterns and relationships. For instance, turning car makes and models into dummy variables allow models to capture the influence of specific brands and types on car prices. By converting categorical attributes into binary variables, we preserve the informational value of these attributes without imposing ordinality, which could mislead the model.
+								<br/><br/>The meticulous data preprocessing, feature engineering and transformation into dummy variables underscore the project's comprehensive approach to preparing the dataset for advanced analytics. These steps significantly contribute to the reliability and robustness of the resulting machine-learning models. For an in-depth understanding of the impact of these preprocessing techniques and their implementation, examining the provided code offers valuable insights into their crucial role in the project's success.
+							
+							</p>
+											
+							<hr />
+							<h2>Analytics and Machine Learning</h2>
+							<p>	
+							In the project, machine learning (ML) techniques were adeptly applied to analyze car features and prices, leveraging both supervised and unsupervised learning methods. Linear Regression and K-Means clustering were chosen for their distinct capabilities to unravel the dataset's complexities and extract meaningful insights.	
+							<br/><br/><b>Linear Regression</b> (Supervised Learning) was employed to predict car prices based on a multitude of features such as make, model, engine specifications, and more. This method was selected due to its efficiency in handling continuous data, making it ideal for price predictions. The linear relationship assumption between the features and the target variable (car price) allowed for an intuitive understanding and interpretation of how different features influence car prices. The model's performance, assessed through metrics like the R² score and explained variance, indicated a high level of accuracy, demonstrating the predictive power and relevance of the chosen features.
+							<br/><br/><b>K-Means (Unsupervised</b> Learning), on the other hand, was utilized to segment the cars into clusters based on their features, without any predefined labels. This approach was instrumental in identifying inherent groupings or patterns within the data, such as similarities in car specifications or categories. By analyzing these clusters, insights into market segmentation and potential niche markets were uncovered, providing valuable information for targeted marketing strategies and product development.
+							<br/><br/>Together, these ML techniques facilitated a comprehensive analysis of the dataset. Linear Regression offered precise predictions and insights into feature importance for car pricing, while K-Means revealed natural groupings within the cars, highlighting similarities and differences that might not be immediately obvious. This dual approach exemplified the power of combining supervised and unsupervised learning to derive both predictive insights and deeper understanding of the data structure.</p>
+							<div>
+								<ul class="actions special">
+									<li><a href="https://www.kaggle.com/datasets/rupindersinghrana/car-features-and-prices-dataset" class="button" target="_blank">Go to original dataset</a></li>
+									<li><a href="/documents/python_project/python_project_car_features.csv" class="button icon solid fa-download" download="python_project_car_features.csv">Download Car Features Data</a></li>
+									<li><a href="https://github.com/SebMarten/portfolio/blob/a7e024c90dc4a5c90b59ca9eeda57403cac4a921/projects/python_project.py" class="button" target="_blank">Check out the complete code in GitHub</a></li>
+								</div>
+							<hr />
+							<h2>Excursion: Visualisation for Data Processing</h2>
+							<p>	
+								In this project, visualizations played a crucial role in the processing and analysis of both numerical and categorical data, as well as in determining the optimal number of clusters for K-Means clustering, showcasing exceptional design and aesthetics to enhance user understanding.
+								<span class="image fit"><img src="images/project_python/python_missing_values.png" alt="" /></span>
+								<b>Missing Values Visualization</b>: To address and manage missing values in the dataset, the project utilized heatmap visualizations, which provided a powerful and intuitive graphical representation of data completeness across different variables. Heatmaps highlighted the presence and distribution of missing values in a color-coded format, making it easy to identify patterns of missingness, whether random or systematic, across the dataset.								
+								<span class="image fit"><img src="images/project_python/python_outliers_categorical.png" alt="" /></span>
+								<b>Categorical Data Visualization</b>: Categorical variables were explored through bar plots, which illustrated the frequency distribution of categories within each feature. This was particularly useful for understanding the diversity in car makes, models, and fuel types, aiding in the identification of dominant categories and potential biases in the data. Such visualizations supported decisions on data encoding and simplification, ensuring that the models would not be unduly influenced by categories with sparse representation.
+								<span class="image fit"><img src="images/project_python/python_outliers_numerical.png" alt="" /></span>
+								<b>Numerical Data Visualization</b>: For numerical data, histograms and box plots were utilized to assess the distribution and identify outliers. Histograms provided insights into the skewness and kurtosis, offering a visual representation of the data's spread and symmetry. Box plots complemented this by highlighting median values and potential outliers, allowing for a concise overview of data variability and extreme values. These visualizations facilitated informed decisions regarding data normalization and outlier treatment, crucial steps in preprocessing data for machine learning models.					
+								<span class="image fit"><img src="images/project_python/python_kmeans_elbow.png" alt="" /></span>
+								<b>K-Means Inertia Plot</b>: To determine the optimal number of clusters for K-Means clustering, an inertia plot was created. Inertia measures the within-cluster sum of squares, and plotting these values against the number of clusters revealed the "elbow point" – a key indicator of the most appropriate cluster count. This visualization was instrumental in selecting the number of clusters that balanced complexity with meaningful segmentation, thereby maximizing the interpretability and utility of the clustering outcomes.
+							
+						</section>
+					</div>
+
+				<!-- Footer -->
+							<!--<footer>
+								<div class="pagination">
+									<a href="#" class="previous">Prev</a>
+									<a href="#" class="page active">1</a>
+									<a href="#" class="page">2</a>
+									<a href="#" class="page">3</a>
+									<span class="extra">&hellip;</span>
+									<a href="#" class="page">8</a>
+									<a href="#" class="page">9</a>
+									<a href="#" class="page">10</a>
+									<a href="#" class="next">Next</a>
+								</div>-->
+							</footer>
+
+						</div>
+	
+					<!-- Footer -->
+						<footer id="footer">
+							
+							</section>
+							<section class="split contact">
+								<section class="alt">
+									<h3>Address</h3>
+									<p>37574 Einbeck, Germany<br />
+									</p>
+								</section>
+								<section>
+									<h3>Phone</h3>
+									<p><a href="#">+49 177 2568798</a></p>
+								</section>
+								<section>
+									<h3>Email</h3>
+									<p><a href="#">s.gaycken1@gmail.com</a></p>
+								</section>
+								<section>
+									<h3>Social</h3>
+									<ul class="icons alt">
+										<li><a href="https://www.linkedin.com/in/sebastian-gaycken" class="icon brands alt fa-linkedin"><span class="label">Facebook</span></a></li>
+										<li><a href="https://github.com/sebmarten" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									</ul>
+								</section>
+							</section>
+						</footer>
+	
+					<!-- Copyright -->
+						<div id="copyright">
+							<ul><li>&copy; SebastianGaycken</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+						</div>
+	
+				</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
