@@ -1,6 +1,6 @@
 ### The data set on car prices and features can be found here:
 #https://www.kaggle.com/datasets/rupindersinghrana/car-features-and-prices-dataset/data
-### The formula for the visualisation were found online by another author working on this data set:
+### The formula for the visualisation were found online and were created by another author (Mustafa Cakri, 2024) working on this data set:
 # https://www.kaggle.com/code/mustafacakir/car-price-prediction
 
 ### This Python project aims to underline the steps of:
@@ -52,7 +52,7 @@ df.tail()
 df.info()
 
 # In[8]:
-#Getting an overview of missing values. (Formula for fuction below can be found on top of page) 
+#Getting an overview of missing values. (Formula (Mustafa Cakri, 2024) for function below can be found on top of page) 
 def check_missing_values(data):
   '''
     Prints the number of features with missing values and it's percentage
@@ -139,7 +139,7 @@ df_top_models.shape
 df_top_models['Make'].value_counts().shape
 
 # In[22]:
-#Handling missing values (Formula for fuction below can be found on top of page) 
+#Handling missing values (Formula (Mustafa Cakri, 2024) for function below can be found on top of page) 
 check_missing_values(df_top_models)
 #Conclusion: Focusing on the top models and makes has led to a reduction of missing values
 
@@ -182,7 +182,7 @@ df_top_models[df_top_models['Market Category'].isna()].shape
 df_top_models.drop('Market Category', axis=1, inplace=True)
 
 # In[30]:
-#Check whether all missing values are imputed. (Formula for fuction below can be found on top of page) 
+#Check whether all missing values are imputed. (Formula (Mustafa Cakri, 2024) for function below can be found on top of page) 
 check_missing_values(df_top_models)
 #Conclusion: All missing values are imputed.
 
@@ -195,7 +195,8 @@ df_top_models.columns.tolist()
 
 # In[32]:
 ### Outlier Detection ###
-# Create lists for categorical and numeric columns (Formula for fuction below can be found on top of page) 
+# Create lists for categorical and numeric columns (Formula (Mustafa Cakri, 2024) for fun
+ction below can be found on top of page) 
 cat_cols = []
 num_cols = []
 
@@ -288,7 +289,7 @@ df_top_models[(df_top_models['model'] == 'Jimmy')]
 #After some online research the Transmission Types of the unkown vehicles is Manual
 
 # In[35]:
-#Repalce all 'Unkown' values with 'Manual' (Formula for fuction below can be found on top of page) 
+#Repalce all 'Unkown' values with 'Manual' (Formula (Mustafa Cakri, 2024) for function below can be found on top of page) 
 df_top_models['transmission_type'] = df_top_models['transmission_type'].replace('UNKNOWN', 'MANUAL')
 
 # In[36]:
